@@ -1,136 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="//cdn.rawgit.com/jmnote/plantuml-encoder/d133f316/dist/plantuml-encoder.min.js"></script>
 
 </head>
+
 <body>
-<body>
-<div class="container">
-    <div class="row">
-        <h2>Class Diagram Teacher</h2>
+
+<body style="background-color: black;color:whitesmoke">
+<div class="container" style="margin-top: 2em;">
+    <div class="row align-items-center" style="color: whitesmoke;">
+        <div class="col-1">
+            <img src="/logo.PNG" style="max-width: 100px;">
+        </div>
+        <div class="col-2">
+            <h2>Class Maker</h2>
+            <button class="btn btn-outline-info"  data-bs-toggle="modal" data-bs-target="#modalId">See how it works</button>
+        </div>
+        <div class="col-8" style="font-style: italic;">
+            ClassMaker is a simple education tool designed to help users create UML class diagrams with ease. It utilizes
+            text inputs to generate diagrams quickly, allowing users to visualize class structures easily.
+        </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 2em;color:whitesmoke">
         <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-
-                            <label for="question" class="form-label mb-0">Make a class diagram</label>
-
-
-                            <textarea rows="5" cols="50" class="form-control" id="prompt-uml" aria-describedby="questionHelp"></textarea>
-
+            <div class="card" style="min-height:21em;background-color: black;">
+                <div class="card-body" style="color:whitesmoke">
+                    <label for="prompt-uml" >State your wishes to the class/classes to create</label>
+                    <textarea rows="8" cols="80" class="form-control" id="prompt-uml"
+                              aria-describedby="questionHelp"></textarea>
+                    <br />
+                    <button id="btn-uml" class="btn btn-outline-info">Make UML</button>
+                    <div id="get-uml-spinner" class="spinner-border text-primary" role="status"
+                         style="margin-left: 5em;display:none">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
-                    <button id="btn-uml" class="btn btn-primary">Get answer</button>
                     <p id="error-uml" style="color:red"></p>
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    <img id="image-uml" src="#"></img>
+        <div class="col-3">
+            <div class="card" style="min-height:21em;background-color: black;">
+                <div class="card-body d-flex flex-column align-items-center" >
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img id="image-uml" src="" style="display: none;"></img>
+                    </div>
+                    <button id="btn-explain" class="btn btn-outline-info" style="display: none;margin-top:8px;">Explain Diagram</button>
+                    <button id="btn-show-plantuml" class="btn btn-outline-info" style="display: none;margin-top:8px;">Show plantUML (in console)</button>
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 3, Row 1
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 1, Row 2
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 2, Row 2
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 3, Row 2
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 1, Row 3
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 2, Row 3
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card">
-                <div class="card-body">
-                    Column 3, Row 3
+        <div class="col-5">
+            <div class="card" id="card-explanation" style="display: none;">
+                <div class="card-body" style="color: #0f063f; ">
+                    <p id="explanation" ></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</body>
 
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="d-flex align-items-center">
-                <div class="mb-3 me-2">
-                    <label for="question" class="form-label mb-0">Questions</label>
-                </div>
-                <div class="mb-3 me-2">
-                    <input type="text" class="form-control" id="question" aria-describedby="questionHelp">
-                </div>
-                <button id="btn" class="btn btn-primary">Get answer</button>
+<div class="modal fade" id="modalId" tabindex="-1"  role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitleId" style="color:rgb(31, 8, 105);">How this application is designed</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            <div id="answer">
+            <div class="modal-body" style="text-align: center;">
+                <img src="" id="modal-image" style="max-width: 100%;max-height: 100%;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 
             </div>
         </div>
-        <div class="col">
-            <form class="d-flex align-items-center">
-                <div class="mb-3 me-2">
-                    <label for="question" class="form-label mb-0">Make a class diagram</label>
-                </div>
-                <div class="mb-3 me-2">
-                    <textarea rows="5" cols="50" class="form-control" id="promptx-uml" aria-describedby="questionHelp"></textarea>
-                </div>
-            </form>
-            <button id="btn-uml" class="btn btn-primary">Get answer</button>
-            <p id="error-uml" style="color:red"></p>
-
-        </div>
-
     </div>
-
 </div>
 
 <script src="index.js"></script>
 </body>
+
 </html>
