@@ -1,7 +1,7 @@
 
 
 //const URL = "http://localhost:8080";
-const URL = "http://20.101.34.0:9999";
+const URL = "http://20.101.34.0";
 let plantUML = ""
 let plantUML2 = ""
 
