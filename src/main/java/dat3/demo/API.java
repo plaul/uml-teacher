@@ -56,7 +56,7 @@ public class API {
     if (!bucket.tryConsume(1)) {
       throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS,"To many requests, try again latter");
     }
-    String prompt = "explain the oo concepts, and explain the types of relations involved (inheritance, composition or aggregation) in this plantuml diagram.";
+    String prompt = "explain the oo concepts, and explain the correct uml type of relations involved in this plantuml diagram.";
     prompt += "Dont use any plantuml terms in the description, but explain it from what a user will see. Provide the response nicely formatted as HTML ready to be inserted in a div:";
     String response = apiService.getResponse(prompt+plantuml,300);
     return new AiResponse(prompt,response);
@@ -67,8 +67,8 @@ public class API {
     if (!bucket.tryConsume(1)) {
       throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS,"To many requests, try again latter");
     }
-    if(!question.toLowerCase().contains("class")){
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Text must contain at least one occurence of the word 'class'");
+    if(!(question.toLowerCase().contains("class") ||question.toLowerCase().contains("klasse")) ){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Text must contain at least one occurrence of the word 'class'");
     }
     String myPart = ".Can you create a response that must start with @startuml and end with @enduml";
     myPart += "including only source code for valid plantuml drawing representing the classes, properties, and relationships?";

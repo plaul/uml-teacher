@@ -35,11 +35,15 @@
                     <textarea rows="8" cols="80" class="form-control" id="prompt-uml"
                               aria-describedby="questionHelp"></textarea>
                     <br />
-                    <button id="btn-uml" class="btn btn-outline-info">Make UML</button>
-                    <div id="get-uml-spinner" class="spinner-border text-primary" role="status"
-                         style="margin-left: 5em;display:none">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
+                    <button id="btn-uml" class="btn btn-outline-info">
+                        Make UML
+                        <span id="get-uml-spinner" style="display:none" class="spinner-border spinner-border-sm"></span>
+                    </button>
+
+                    <!-- <div id="get-uml-spinner" class="spinner-border text-primary" role="status"
+                      style="display:inline-block">
+                      <span class="visually-hidden">Loading...</span>
+                    </div> -->
                     <p id="error-uml" style="color:red"></p>
                 </div>
             </div>
@@ -50,7 +54,10 @@
                     <div class="d-flex justify-content-center align-items-center">
                         <img id="image-uml" src="" style="display: none;"></img>
                     </div>
-                    <button id="btn-explain" class="btn btn-outline-info" style="display: none;margin-top:8px;">Explain Diagram</button>
+                    <button id="btn-explain" class="btn btn-outline-info" style="display: none;margin-top:8px;">
+                        Explain Diagram
+                        <span id="get-explain-spinner" style="display:none" class="spinner-border spinner-border-sm"></span>
+                    </button>
                     <button id="btn-show-plantuml" class="btn btn-outline-info" style="display: none;margin-top:8px;">Show plantUML (in console)</button>
                 </div>
             </div>

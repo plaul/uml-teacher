@@ -1,11 +1,9 @@
 
 
-const URL = "";
-//const URL = "http://20.101.34.0:9999";
+//const URL = "http://localhost:8080";
+const URL = "http://20.101.34.0:9999";
 let plantUML =""
 let plantUML2 =""
-
-//--
 
 
 const plantUmlArchitecture = `
@@ -55,19 +53,20 @@ async function handleHttpErrors(res) {
 async function getExplanation(){
     if(plantUML === "") return;
     // document.getElementById("error-explain").innerText = "";
+    document.getElementById("get-explain-spinner").style.display = "inline-block";
 
-    //document.getElementById("get-explain-spinner").style.display = "block";
     try {
         const encoded = btoa(plantUML)
         const res = await fetch(URL+"/api/ai/explanation?plantuml="+encoded) .then(handleHttpErrors)
         document.getElementById("explanation").innerHTML= res.answer
         document.getElementById("card-explanation").style.display = "block";
 
+
     } catch (error){
         document.getElementById("error-explain").innerText = error.message;
         document.getElementById("image-explain").setAttribute("src","#")
     } finally {
-        //document.getElementById("get-explain-spinner").style.display = "none";
+        document.getElementById("get-explain-spinner").style.display = "none";
     }
 }
 
@@ -75,7 +74,7 @@ async function getUml(){
     zeroState()
     document.getElementById("error-uml").innerText = "";
     document.getElementById("image-uml").style.display = "none";
-    document.getElementById("get-uml-spinner").style.display = "block";
+    document.getElementById("get-uml-spinner").style.display = "inline-block";
     plantUML = ""
     const question = document.getElementById("prompt-uml").value;
     try {
@@ -93,5 +92,4 @@ async function getUml(){
     } finally {
         document.getElementById("get-uml-spinner").style.display = "none";
     }
-
 }
