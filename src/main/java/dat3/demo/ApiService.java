@@ -52,7 +52,6 @@ public class ApiService {
 
     System.out.println("----> "+firstChoiceText);
     return firstChoiceText;
-    // return "YOU SHOULD RETURN THE TRANSLATED TEXT";
 
   }
 
