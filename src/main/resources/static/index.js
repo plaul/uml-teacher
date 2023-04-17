@@ -17,6 +17,10 @@ document.getElementById("btn-explain").onclick = getExplanation
 document.getElementById("btn-show-plantuml").onclick = () => console.log(plantUML)
 document.getElementById("btn-lucky").onclick = getRandomPrompt
 document.getElementById("btn-show-umljoke").onclick = ()=> document.getElementById("uml-joke").innerText = getRandomUMLJoke()
+document.getElementById("btn-clear").onclick = ()=> {
+  document.getElementById("prompt-uml").value = ""
+  zeroState()
+}
 
 function zeroState() {
   document.getElementById("error-uml").innerText = "";
