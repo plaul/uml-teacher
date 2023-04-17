@@ -36,7 +36,7 @@ public class API {
 
   public API(ApiService apiService) {
     this.apiService = apiService;
-    Bandwidth limit = Bandwidth.classic(20, Refill.greedy(20, Duration.ofMinutes(10)));
+    Bandwidth limit = Bandwidth.classic(60, Refill.greedy(60, Duration.ofMinutes(10)));
     this.bucket = Bucket.builder()
             .addLimit(limit)
             .build();
